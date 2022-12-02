@@ -1,4 +1,3 @@
-
 LOSES_TO_DICT = {
     'A': 'B',
     'B': 'C',
@@ -22,8 +21,7 @@ def rps(rounds_list):
     print(rounds_list)
     sum_score = 0
     for round in rounds_list:
-        splitted_round = round.split()
-        score = score_calc(splitted_round[0], splitted_round[1])
+        score = score_calc(round.split()[0], round.split()[1])
         sum_score += score
     return sum_score
 
@@ -37,8 +35,6 @@ def score_calc(opponent, mine):
         match_result = 3
     elif LOSES_TO_DICT[opponent] == mine_mapped:
         match_result = 6
-    else:
-        print('Houston we have a problem')
     score = POINTS_DICT[mine_mapped] + match_result
 
     return score
