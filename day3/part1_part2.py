@@ -15,7 +15,7 @@ def read_file():
     return infile
 
 
-def prioritization(rucksacks, priority_dict):
+def prioritization_part1(rucksacks, priority_dict):
     sum_priorities = 0
     for rucksack in rucksacks:
         compartment1 = rucksack[:int(len(rucksack)/2)]
@@ -29,6 +29,21 @@ def prioritization(rucksacks, priority_dict):
     return sum_priorities
 
 
+def part2(rucksacks, priority_dict):
+    sum_priorities = 0
+    for x in range(len(rucksacks))[::3]:
+        group_rucksack_list = []
+        group_rucksack_list.append([rucksacks[x], rucksacks[x+1], rucksacks[x+2]])
+        for item in rucksacks[x]:
+            if item in rucksacks[x+1]:
+                if item in rucksacks[x+2]:
+                    sum_priorities += priority_dict[item]
+                    break
+    return sum_priorities
+
+
 if __name__ == '__main__':
-    result = prioritization(read_file(), set_item_priority())
-    print(result)
+    result_part1 = prioritization_part1(read_file(), set_item_priority())
+    print(f'part1: {result_part1}')
+    result_part2 = part2(read_file(), set_item_priority())
+    print(f'part2: {result_part2}')
